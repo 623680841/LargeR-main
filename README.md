@@ -37,6 +37,7 @@ If you don't have Mamba installed, download **Miniforge** here:
 *Already have Conda?* You can install mamba in your base environment:
 ```bash
 conda install -n base -c conda-forge mamba
+'''
 2. Set up Environment
 3. Install Dependencies
 🔑 DeepSeek API Configuration
