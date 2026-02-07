@@ -4,11 +4,7 @@
     <img src="docs/fig_sum.png" width="800" alt="LargeR Architecture">
     <br><br>
     <a href="[https://platform.deepseek.com/](https://platform.deepseek.com/)">
-        <img src="[https://img.shields.io/badge/Powered%20by-DeepSeek-blue?logo=openai&logoColor=white](https://img.shields.io/badge/Powered%20by-DeepSeek-blue?logo=openai&logoColor=white)" alt="DeepSeek">
-    </a>
-    <img src="[https://img.shields.io/badge/Python-3.9-green.svg](https://img.shields.io/badge/Python-3.9-green.svg)" alt="Python 3.9">
-    <img src="[https://img.shields.io/badge/License-MIT-yellow.svg](https://img.shields.io/badge/License-MIT-yellow.svg)" alt="License">
-</div>
+
 
 **LargeR** is an interactive, natural language-based agent for RNA-Ligand interaction modeling. It seamlessly integrates data preparation, feature encoding, model training, validation, and visualization into a fully automated workflow driven by Large Language Models (LLMs).
 
