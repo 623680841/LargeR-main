@@ -162,7 +162,6 @@ class AgentController:
             print("Training cancelled.")
             return
         
-        # 定义训练逻辑字符串
         houxu = f'''
 import torch
 import torch.nn as nn
@@ -185,13 +184,12 @@ epochs = 100
 batch_size = 32
 best_model_path = "best_model.pth"
 
-# --- 1. 数据集划分为三份：Train (70%), Val (15%), Test (15%) ---
 train_data, temp_data = train_test_split(data, test_size=0.3, random_state=42)
 val_data, test_data = train_test_split(temp_data, test_size=0.5, random_state=42)
 print(f"Train size: {{len(train_data)}}, Val size: {{len(val_data)}}, Test size: {{len(test_data)}}")
 
 def predict(model, sample):
-    model.eval() # 预测时确保是 eval 模式
+    model.eval() 
     inputs = []
     for feature_name in {feature}:
         if feature_name in sample.index:
@@ -239,8 +237,7 @@ for epoch in range(epochs):
         batch_loss = 0
         
         for _, row in batch.iterrows():
-            # 这里的 predict 内部会调 model.eval()，但在训练循环里我们要手动切回 model.train()
-            # 为了效率，直接在训练循环内实现 forward
+
             inputs = []
             for f_name in {feature}:
                 inputs.append(torch.from_numpy(row[f_name]).to(device))
@@ -260,7 +257,6 @@ for epoch in range(epochs):
 
     avg_train_loss = running_loss / num_batches
     
-    # --- 2. 验证与保存 Best Checkpoint ---
     val_acc = evaluate(model, val_data)
     
     if val_acc > best_val_acc:
@@ -273,7 +269,6 @@ for epoch in range(epochs):
     print(f'Epoch {{epoch+1}}/{{epochs}} | Loss: {{avg_train_loss:.4f}} | Val Acc: {{val_acc:.4f}}{{status_msg}}')
 
 print("-" * 50)
-# --- 3. 训练完后读取最好的模型 ---
 if os.path.exists(best_model_path):
     print(f"Loading best model from {{best_model_path}} for testing...")
     model.load_state_dict(torch.load(best_model_path))
@@ -387,4 +382,5 @@ Available commands:
             traceback.print_exc()
             print(f"\nModel code saved at: {self.model_code_path}")
             print("You can manually edit this file to fix issues, then restart and select 'yes' to use the saved code.")
+
             return
