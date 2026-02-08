@@ -184,7 +184,7 @@ epochs = 100
 batch_size = 32
 best_model_path = "best_model.pth"
 
-train_data, temp_data = train_test_split(data, test_size=0.3, random_state=42)
+train_data, temp_data = train_test_split(data, test_size=0.2, random_state=42)
 val_data, test_data = train_test_split(temp_data, test_size=0.5, random_state=42)
 print(f"Train size: {{len(train_data)}}, Val size: {{len(val_data)}}, Test size: {{len(test_data)}}")
 
@@ -382,5 +382,4 @@ Available commands:
             traceback.print_exc()
             print(f"\nModel code saved at: {self.model_code_path}")
             print("You can manually edit this file to fix issues, then restart and select 'yes' to use the saved code.")
-
             return

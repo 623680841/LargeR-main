@@ -124,16 +124,20 @@ def check_and_process_data(input_path, output_path):
         model.eval()
         model.to(device)
 
-        result = {}
-        result['RNA'] = 'rna_sequence'
-        result['region'] = 'region_mask'
-        result['ligand'] = 'smile'
-        result['label'] = 'label'
-        result['explain'] = 'nothing'
+        result = Feature_Recognition(data)
+        finish = False
+        while finish == False:
+            print(result['explain'])
+            print('Sujested feature: ', {'RNA': result['RNA'], 'region': result['region'], 'ligand': result['ligand']}, 'Sujested label: ', '"', result['label'], '"')
+            asking = "\n[Need adjust?(tape 'finish' to end)] → "
+            user_input = input(asking).strip()
+            if user_input == 'finish':
+                finish = True
+            else:
+                result = Feature_adaption(data, result, user_input)
+                print(result['explain'])
         
-        data[result['region']] = data[result['region']].apply(
-            lambda x: str2list(x) if isinstance(x, str) else x
-        )
+        data[result['region']] = data[result['region']].apply(str2list)
         
         data['rna_feature'] = data.apply(
             lambda row: build_rna_feature(
@@ -185,5 +189,3 @@ def column_process(column, data, new_column_name):
             plan = column_process_adjust(data[column], code, description, new_column_name)
                
     return data
-
-

@@ -483,31 +483,109 @@ def column_process_adjust(column_data, code, description, new_column_name):
     """
     return run_LLM_json_auto_retry(full_prompt)
 
+import json
+import re
+from larger.llm_api import run_LLM
+
+def parse_json_response(response_text):
+    try:
+        return json.loads(response_text)
+    except json.JSONDecodeError:
+        try:
+            pattern = r"```json\s*(.*?)\s*```"
+            match = re.search(pattern, response_text, re.DOTALL)
+            if match:
+                return json.loads(match.group(1))
+            else:
+                start = response_text.find('{')
+                end = response_text.rfind('}') + 1
+                if start != -1 and end != 0:
+                    return json.loads(response_text[start:end])
+                else:
+                    raise Exception("error loading JSON")
+        except Exception as e:
+            print(f"JSON Parsing Error: {e}\nRaw Text: {response_text}")
+            return {"RNA": "", "region": "", "ligand": "", "label": "", "explain": "Error parsing LLM response"}
 
 def Feature_Recognition(data):
-    """Recognize features in the data"""
-    columns = list(data.columns)
-    full_prompt = f"""
-    You are RLAgent, an assistant helping the user with RNA-Ligand modeling.
-    
-    Please identify which columns in the dataset should be used as features for the model.
-    
-    Available columns: {columns}
-    
-    Return the content in JSON format:
-    - features: list of column names to use as features
-    - label: column name to use as label
-    - explain: explanation
-    
-    Please respond with JSON only.
     """
-    return run_LLM_json_auto_retry(full_prompt)
+    reconginze feature and label from dataset
+    """
+    print("🤖 AI is analyzing your dataset columns...")
+    
+    columns = list(data.columns)
+    sample_row = data.iloc[0].to_dict()
+    
+    safe_sample = {}
+    for k, v in sample_row.items():
+        val_str = str(v)
+        safe_sample[k] = val_str[:100] + "..." if len(val_str) > 100 else val_str
 
+    prompt = f"""
+    You are an expert Bio-Data Scientist. analyze the dataset columns.
+    
+    Dataset Columns: {columns}
+    First Row Sample: {json.dumps(safe_sample)}
+    
+    Task: Identify the column names for these 4 specific roles:
+    1. 'RNA': Column with RNA sequences (e.g., 'AUCG...').
+    2. 'region': Column with region masks (e.g., lists '[0,1,0...]' or string representations).
+    3. 'ligand': Column with Ligand names or SMILES strings.
+    4. 'label': The target column (usually integers 0/1 or floats).
 
-def Feature_adaption(data, features):
-    """Adapt features for the model"""
-    return features
+    IMPORTANT: You must return a strict JSON object with exactly these keys:
+    {{
+        "RNA": "column_name_here",
+        "region": "column_name_here",
+        "ligand": "column_name_here",
+        "label": "column_name_here",
+        "explain": "Brief reason for your choice"
+    }}
+    
+    If you are not sure, pick the most likely one based on the sample data.
+    Respond with JSON only. No markdown formatting.
+    """
+    
+    response = run_LLM(prompt)
+    return parse_json_response(response)
 
+def Feature_adaption(data, current_result, user_input):
+    """
+    adapt according to user
+    """
+    print("🔄 AI is adjusting columns based on your feedback...")
+    
+    columns = list(data.columns)
+    
+    prompt = f"""
+    You are an assistant helping a user configure dataset columns.
+    
+    Current Configuration:
+    {json.dumps(current_result)}
+    
+    Available Columns in Dataset:
+    {columns}
+    
+    User Feedback: "{user_input}"
+    
+    Task: Update the configuration based on the User Feedback.
+    For example, if user says "the RNA column is actually seq_1", update "RNA" to "seq_1".
+    Keep other columns unchanged unless specified.
+
+    Return the updated JSON object with the SAME keys:
+    {{
+        "RNA": "...",
+        "region": "...",
+        "ligand": "...",
+        "label": "...",
+        "explain": "Briefly explain what you changed"
+    }}
+    
+    Respond with JSON only.
+    """
+    
+    response = run_LLM(prompt)
+    return parse_json_response(response)
 
 def absolute_exec(code, namespace):
     """Execute code in the given namespace"""
