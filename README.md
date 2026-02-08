@@ -17,10 +17,11 @@
 We strongly recommend using **Mamba** instead of Conda for faster dependency resolution.
 
 ### 1. Set up Environment
-# Create environment using Mamba (faster)
-mamba create -n LargeR python=3.9
-mamba activate LargeR
-
+# Create environment
+```
+conda create -n LargeR python=3.9 -y
+conda activate LargeR
+```
 # Clone the repository
 git clone [https://github.com/623680841/LargeR-main.git](https://github.com/623680841/LargeR-main.git)
 cd LargeR-main
