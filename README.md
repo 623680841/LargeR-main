@@ -32,7 +32,7 @@ If you don't have Mamba installed, you can download **Miniforge** (which include
 ```bash
 conda install -n base -c conda-forge mamba
 ```
-2. Set up Environment
+### 2. Set up Environment
 # Create environment using Mamba (faster)
 mamba create -n LargeR python=3.9
 mamba activate LargeR
@@ -40,13 +40,14 @@ mamba activate LargeR
 # Clone the repository
 git clone [https://github.com/623680841/LargeR-main.git](https://github.com/623680841/LargeR-main.git)
 cd LargeR-main
-3. Install Dependencies
+
+### 3. Install Dependencies
 ```
 pip install -r requirements.txt
 # Install the package in editable mode
 pip install -e .
 ```
-🔑 DeepSeek API Configuration
+### 🔑 DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 Step 1: Get Your Key
 Register at DeepSeek Open Platform.
@@ -61,7 +62,9 @@ You have two options to configure the key. Option A is recommended for security.
 Option A: Environment Variable (Safe & Recommended)
 Run this command in your terminal before starting the agent:
 # Replace with your actual key
+```bash
 export DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
 Option B: Edit Config File (Quick Start)
 If you prefer, you can paste your key directly into the code.
 
@@ -69,17 +72,19 @@ Open larger/llm_tools.py.
 
 Find the API_KEY variable and paste your key:
 
-Python
+```bash
 # larger/llm_tools.py
 
-# ⚠️ WARNING: Do not push this file to GitHub after pasting your real key!
+
 API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
 BASE_URL = "[https://api.deepseek.com](https://api.deepseek.com)"
+```
 💻 Usage
 Once installed, simply run the agent:
 
-Bash
+```bash
 python run_agent.py
+```
 Interactive Workflow
 Data Prep: The agent will ask you to prepare a csv file (e.g., datasets/train.csv).
 
