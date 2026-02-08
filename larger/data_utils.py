@@ -120,7 +120,7 @@ def check_and_process_data(input_path, output_path):
 
         model, alphabet = fm.pretrained.rna_fm_t12()
         batch_converter = alphabet.get_batch_converter()
-        device = 'cuda:3' if torch.cuda.is_available() else 'cpu'
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
         model.eval()
         model.to(device)
 
@@ -183,3 +183,4 @@ def column_process(column, data, new_column_name):
             plan = column_process_adjust(data[column], code, description, new_column_name)
                
     return data
+
