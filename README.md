@@ -16,15 +16,7 @@
 
 We strongly recommend using **Mamba** instead of Conda for faster dependency resolution.
 
-### 1. Install Mamba (Optional but Recommended)
-If you don't have Mamba installed, you can download **Miniforge** (which includes Mamba) here:
-👉 **[Download Miniforge / Mamba](https://github.com/conda-forge/miniforge#download)**
-
-*Already have Conda?* You can just install mamba in your base environment:
-```bash
-conda install -n base -c conda-forge mamba
-```
-### 2. Set up Environment
+### 1. Set up Environment
 # Create environment using Mamba (faster)
 mamba create -n LargeR python=3.9
 mamba activate LargeR
@@ -33,7 +25,7 @@ mamba activate LargeR
 git clone [https://github.com/623680841/LargeR-main.git](https://github.com/623680841/LargeR-main.git)
 cd LargeR-main
 
-### 3. Install Dependencies
+### 2. Install Dependencies
 ```
 pip install -r requirements.txt
 # Install the package in editable mode
