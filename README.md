@@ -40,8 +40,8 @@ mamba activate LargeR
 # Clone the repository
 git clone [https://github.com/623680841/LargeR-main.git](https://github.com/623680841/LargeR-main.git)
 cd LargeR-main
-```
 3. Install Dependencies
+```
 pip install -r requirements.txt
 # Install the package in editable mode
 pip install -e .
