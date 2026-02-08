@@ -12,14 +12,6 @@
 
 **LargeR** is an interactive, natural language-based agent for RNA-Ligand interaction modeling. It automates the entire deep learning workflow—from data preparation to model training and self-correcting code generation—allowing researchers to focus on biological insights.
 
-## ✨ Key Features
-* **🤖 Interactive & Intelligent**: Just chat with the agent to build models.
-* **⚡ Mamba-Ready**: Optimized for fast environment setup.
-* **📉 Smart Training**: Automated Train/Val/Test splitting and Best-Checkpoint saving.
-* **🛠️ Self-Healing**: Automatically detects bugs in generated code and fixes them.
-
----
-
 ## 🚀 Installation
 
 We strongly recommend using **Mamba** instead of Conda for faster dependency resolution.
@@ -94,4 +86,3 @@ Training: It automatically trains the model and saves the best version as best_m
 
 Result: Performance metrics (AUC, Accuracy) are reported automatically.
 
-<div align="center"> Created by Yunkai Li | Powered by LLM </div>
