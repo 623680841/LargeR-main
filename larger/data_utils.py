@@ -118,27 +118,34 @@ def check_and_process_data(input_path, output_path):
         data = pd.read_csv(input_path)
         print(f"Loaded {len(data)} rows")
 
+        # Load a pretrained RNA-FM model for RNA sequence embedding extraction
         model, alphabet = fm.pretrained.rna_fm_t12()
         batch_converter = alphabet.get_batch_converter()
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
         model.eval()
         model.to(device)
-
+        
+        # Automatically infer candidate feature columns and label column from the dataset
         result = Feature_Recognition(data)
+
+        # Interactive loop allowing the user to adjust inferred features via natural language
         finish = False
         while finish == False:
             print(result['explain'])
             print('Sujested feature: ', {'RNA': result['RNA'], 'region': result['region'], 'ligand': result['ligand']}, 'Sujested label: ', '"', result['label'], '"')
             asking = "\n[Need adjust?(tape 'finish' to end)] → "
             user_input = input(asking).strip()
-            if user_input == 'finish':
+            if user_input == 'finish': # User confirms the final feature and label configuration
                 finish = True
             else:
                 result = Feature_adaption(data, result, user_input)
                 print(result['explain'])
+
+        data[result['region']] = data[result['region']].apply(
+            lambda x: str2list(x) if isinstance(x, str) else x
+        )
         
-        data[result['region']] = data[result['region']].apply(str2list)
-        
+        # Build RNA sequence embeddings using the pretrained RNA-FM model
         data['rna_feature'] = data.apply(
             lambda row: build_rna_feature(
                 row,
@@ -150,8 +157,11 @@ def check_and_process_data(input_path, output_path):
             ),
             axis=1
         )
+
+        # Build RNA sequence embeddings using the pretrained RNA-FM model
         data['rna_feature'] = data['rna_feature'].apply(np.array)
 
+        # Build ligand vocabulary and encode ligand features using one-hot representation
         words = get_dict(data[result['ligand']].tolist())
         data['ligand_feature'] = data[result['ligand']].apply(lambda x: ligand2onehot(x, words))
         data['ligand_feature'] = data['ligand_feature'].apply(np.array)
@@ -189,3 +199,4 @@ def column_process(column, data, new_column_name):
             plan = column_process_adjust(data[column], code, description, new_column_name)
                
     return data
+
