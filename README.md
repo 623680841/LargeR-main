@@ -68,4 +68,7 @@ Once installed, simply run the agent:
 python run_agent.py
 ```
 
+Users should place the input dataset as a CSV file named train.csv under the ./datasets/ directory. To facilitate quick testing and reproducibility, we provide a small demonstration dataset in the ./datasets/ directory. 
+
+During execution, LargeR automatically handles data loading, model initialization, training, and evaluation according to the default settings specified in the repository. 
 
