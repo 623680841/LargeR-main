@@ -14,8 +14,6 @@
 
 ## 🚀 Installation
 
-We strongly recommend using **Mamba** instead of Conda for faster dependency resolution.
-
 ### 1. Set up Environment
 # Create environment
 ```
@@ -30,6 +28,7 @@ cd LargeR-main
 ```
 pip install -r requirements.txt
 ```
+Mamba-SSM Installation: Please follow the official installation instructions provided in the Mamba-SSM repository: [https://github.com/state-spaces/mamba](https://github.com/state-spaces/mamba)
 ### 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 Step 1: Get Your Key
