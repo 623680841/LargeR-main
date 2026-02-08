@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 
 def run_LLM(prompt: str) -> str:
-    API_KEY = "sk-cafd1c5b525347a0b5bc44a55b30d3a0"
+    API_KEY = "*********Place your key here********"
     BASE_URL = "https://api.deepseek.com"
 
     try:
