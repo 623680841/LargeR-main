@@ -69,7 +69,7 @@ Find the API_KEY variable and paste your key:
 
 
 API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
-BASE_URL = "[https://api.deepseek.com](https://api.deepseek.com)"
+BASE_URL = "https://api.deepseek.com"
 ```
 💻 Usage
 Once installed, simply run the agent:
