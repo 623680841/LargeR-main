@@ -67,12 +67,5 @@ Once installed, simply run the agent:
 ```bash
 python run_agent.py
 ```
-Interactive Workflow
-Data Prep: The agent will ask you to prepare a csv file (e.g., datasets/train.csv).
 
-Auto-Coding: The agent writes the PyTorch model for you.
-
-Training: It automatically trains the model and saves the best version as best_model.pth.
-
-Result: Performance metrics (AUC, Accuracy) are reported automatically.
 
