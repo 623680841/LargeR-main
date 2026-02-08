@@ -77,7 +77,7 @@ Find the API_KEY variable and update it:
 
 Python
 # larger/llm_tools.py
-# ⚠️ WARNING: Do not push this file to GitHub if you paste your real key here!
+
 API_KEY = "sk-your_actual_key_here" 
 BASE_URL = "https://api.deepseek.com"
 💻 Usage
