@@ -82,6 +82,9 @@ def clean_generated_code(code):
     
     return '\n'.join(cleaned_lines)
 
+
+# Orchestrates the end-to-end LargeR workflow, including data preparation,
+# model code generation, validation, and interactive training control.
 class AgentController:
 
     def __init__(self):
@@ -382,4 +385,5 @@ Available commands:
             traceback.print_exc()
             print(f"\nModel code saved at: {self.model_code_path}")
             print("You can manually edit this file to fix issues, then restart and select 'yes' to use the saved code.")
+
             return
