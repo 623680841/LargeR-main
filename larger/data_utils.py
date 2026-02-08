@@ -131,7 +131,9 @@ def check_and_process_data(input_path, output_path):
         result['label'] = 'label'
         result['explain'] = 'nothing'
         
-        data[result['region']] = data[result['region']].apply(str2list)
+        data[result['region']] = data[result['region']].apply(
+            lambda x: str2list(x) if isinstance(x, str) else x
+        )
         
         data['rna_feature'] = data.apply(
             lambda row: build_rna_feature(
@@ -183,4 +185,5 @@ def column_process(column, data, new_column_name):
             plan = column_process_adjust(data[column], code, description, new_column_name)
                
     return data
+
 
