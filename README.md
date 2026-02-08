@@ -29,6 +29,7 @@ cd LargeR-main
 pip install -r requirements.txt
 ```
 Mamba-SSM Installation: Please follow the official installation instructions provided in the Mamba-SSM repository: [https://github.com/state-spaces/mamba](https://github.com/state-spaces/mamba)
+This study incorporates RNA-FM as part of its methodology for RNA representation learning. [https://github.com/ml4bio/RNA-FM](https://github.com/ml4bio/RNA-FM)
 ### 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 Step 1: Get Your Key
