@@ -28,10 +28,8 @@ cd LargeR-main
 ### 2. Install Dependencies
 ```
 pip install -r requirements.txt
-# Install the package in editable mode
-pip install -e .
 ```
-### 🔑 DeepSeek API Configuration
+### 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 Step 1: Get Your Key
 Register at [DeepSeek Open Platform](https://api-docs.deepseek.com/zh-cn/api/deepseek-api/).
