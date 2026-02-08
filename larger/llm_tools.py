@@ -327,25 +327,36 @@ def generate_model(user_input):
 
 def deeplearning_build(data, features, label):
     """
-    Build deep learning model interactively with auto-fix capability.
-    Returns the model code.
+    Interactively build a deep learning model with auto-fix and validation.
+    Returns the final model code.
     """
+
+    # Retrieve the default reference model code
     reference_code = get_reference_code()
     
+    # Outer loop: keeps interacting with the user until a final model is returned
     while True:
+        # Ask the user for modification instructions or to accept the reference code
         asking = "\n[Describe modifications you want (or 'ok' to use reference code)] → "
         response = input(asking).strip()
         
+        # User chooses to use the reference code directly
         if response.lower() == 'ok':
             print("\nUsing reference code as-is.")
             print("\nValidating model...")
-            fixed_code, success = check_and_fix_model_code(reference_code, features, data)
+
+            # Validate and auto-fix the reference model code
+            fixed_code, success = check_and_fix_model_code(
+                reference_code, features, data
+            )
+
             if success:
                 return fixed_code
             else:
                 print("Warning: Model validation failed, but returning code anyway.")
                 return fixed_code
         
+        # Detect whether the user implicitly indicates satisfaction
         if judge_user_satisfied(response, asking):
             print("\nUsing reference code as-is.")
             return reference_code
@@ -353,60 +364,86 @@ def deeplearning_build(data, features, label):
         print("\nGenerating modified model based on your request...")
 
         try:
+            # Generate a new model based on the user's description
             result = generate_model(response)
             generated_code = result['code']
 
+            # Automatically fix syntax or structural issues in the generated code
             generated_code, _ = SmartCodeFixer.auto_fix(generated_code)
             
-
+            # Display the explanation of the generated model
             print("\nExplanation:", result.get('explain', 'No explanation provided.'))
             
+            # Inner loop: confirm, modify, or reject the generated model
             while True:
                 confirm = input("\n[Accept this model? (yes/no/modify)] → ").strip().lower()
                 
+                # User accepts the generated model
                 if confirm == 'yes':
                     print("\nModel accepted! Validating...")
 
-                    fixed_code, success = check_and_fix_model_code(generated_code, features, data)
+                    # Validate and fix the accepted model code
+                    fixed_code, success = check_and_fix_model_code(
+                        generated_code, features, data
+                    )
                     
                     if success:
                         print("Model validation successful!")
                         return fixed_code
                     else:
+                        # Validation failed: provide user with further options
                         print("\nModel validation failed. Options:")
-                        print("  1. 'retry' - Try to fix again")
+                        print("  1. 'retry'  - Try to fix again")
                         print("  2. 'accept' - Accept anyway (may cause training errors)")
                         print("  3. 'modify' - Make more modifications")
                         
                         choice = input("\n[Your choice] → ").strip().lower()
+
+                        # Retry auto-fixing the model multiple times
                         if choice == 'retry':
-                            fixed_code, success = check_and_fix_model_code(fixed_code, features, data, max_retries=5)
+                            fixed_code, success = check_and_fix_model_code(
+                                fixed_code, features, data, max_retries=5
+                            )
                             if success:
                                 return fixed_code
+
+                        # Force accept the model even if validation fails
                         elif choice == 'accept':
                             return fixed_code
+
+                        # Return to modification flow
                         elif choice == 'modify':
                             break
                         
+                # User wants to apply further modifications on top of current code
                 elif confirm == 'modify':
                     further = input("\n[Describe additional modifications] → ").strip()
                     if further:
-                        result = generate_model(f"Based on this code:\n{generated_code}\n\nMake these changes: {further}")
+                        # Regenerate the model based on the current code and new requirements
+                        result = generate_model(
+                            f"Based on this code:\n{generated_code}\n\nMake these changes: {further}"
+                        )
                         generated_code = result['code']
+
+                        # Auto-fix the newly generated code
                         generated_code, _ = SmartCodeFixer.auto_fix(generated_code)
                         
                         print("\nExplanation:", result.get('explain', 'No explanation provided.'))
                         
+                # User rejects the current model and wants to try again
                 elif confirm == 'no':
                     print("\nLet's try a different modification...")
                     break
+
                 else:
                     print("Please enter 'yes', 'no', or 'modify'.")
                     
+        # Catch and report errors during generation or fixing
         except Exception as e:
             print(f"\nError generating model: {e}")
             print("Please try describing your modification differently.")
 
+            
 def result_code_generation(user_input):
     """
     Generate code for result analysis and visualization.
@@ -1068,3 +1105,4 @@ def auto_fix_and_retry(code, query, namespace, max_retries=3):
                 return False, current_code, namespace
     
     return False, current_code, namespace
+
