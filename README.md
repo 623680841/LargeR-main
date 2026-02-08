@@ -74,3 +74,4 @@ Users should place the input dataset as a CSV file named train.csv under the ./d
 
 During execution, LargeR automatically handles data loading, model initialization, training, and evaluation according to the default settings specified in the repository. 
 
+During runtime, both model training and performance inspection can be carried out via natural language interaction.
