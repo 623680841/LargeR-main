@@ -34,7 +34,7 @@ This study incorporates RNA-FM as part of its methodology for RNA representation
 ### 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 
-#Get Your Key
+# Get Your Key
 Register at [DeepSeek Open Platform](https://api-docs.deepseek.com/zh-cn/api/deepseek-api/).
 
 Go to API Keys and create a new key.
