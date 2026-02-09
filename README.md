@@ -42,9 +42,7 @@ Copy the key (starts with sk-...).
 
 # Replace with your actual key
 ```bash
-export DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-Option B: Edit Config File (Quick Start)
 If you prefer, you can paste your key directly into the code.
 
 Open larger/llm_api.py.
