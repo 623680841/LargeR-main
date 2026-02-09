@@ -40,11 +40,6 @@ Go to API Keys and create a new key.
 
 Copy the key (starts with sk-...).
 
-Step 2: Where to put the Key?
-You have two options to configure the key. Option A is recommended for security.
-
-Option A: Environment Variable (Safe & Recommended)
-Run this command in your terminal before starting the agent:
 # Replace with your actual key
 ```bash
 export DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
