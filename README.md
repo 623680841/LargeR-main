@@ -33,7 +33,8 @@ Mamba-SSM Installation: Please follow the official installation instructions pro
 This study incorporates RNA-FM as part of its methodology for RNA representation learning. [https://github.com/ml4bio/RNA-FM](https://github.com/ml4bio/RNA-FM)
 ### 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
-Step 1: Get Your Key
+
+#Get Your Key
 Register at [DeepSeek Open Platform](https://api-docs.deepseek.com/zh-cn/api/deepseek-api/).
 
 Go to API Keys and create a new key.
