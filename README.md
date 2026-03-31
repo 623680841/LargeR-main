@@ -71,3 +71,9 @@ Users should place the input dataset as a CSV file named train.csv under the ./d
 During execution, LargeR automatically handles data loading, model initialization, training, and evaluation according to the default settings specified in the repository. 
 
 During runtime, both model training and performance inspection can be carried out via natural language interaction.
+
+### 5. Paper describing 
+
+This work has been received in Frontiers of Computer Science（FCS） special column “Code & Data”.
+
+Cited as: Zhejun KUANG, Yunkai LI, Yihang BAO, Weichen SONG, Shengyang ZHOU, Zeqi DONG, Weidi WANG, Guan Ning LIN, Han WANG, Zhe LIU, Zhejun KUANG, Yunkai LI, Yihang BAO, Weichen SONG, Shengyang ZHOU, Zeqi DONG, Weidi WANG, Guan Ning LIN, Han WANG, Zhe LIU. A dialogue-guided work flow for automated RNA region–ligand modeling. Front. Comput. Sci., 2026, DOI: 10.1007/s11704-026-60013-1
