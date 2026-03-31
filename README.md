@@ -14,34 +14,34 @@
 
 ## 🚀 Installation
 
-### 1. Set up Environment
-# Create environment
+# 1. Set up Environment
+### Create environment
 ```
 conda create -n LargeR python=3.9 -y
 conda activate LargeR
 ```
-# Clone the repository
+### Clone the repository
 git clone [https://github.com/623680841/LargeR-main.git](https://github.com/623680841/LargeR-main.git)
 cd LargeR-main
 
-### 2. Install Dependencies
+# 2. Install Dependencies
 ```
 pip install -r requirements.txt
 ```
 Mamba-SSM Installation: Please follow the official installation instructions provided in the Mamba-SSM repository: [https://github.com/state-spaces/mamba](https://github.com/state-spaces/mamba)
 
 This study incorporates RNA-FM as part of its methodology for RNA representation learning. [https://github.com/ml4bio/RNA-FM](https://github.com/ml4bio/RNA-FM)
-### 3. DeepSeek API Configuration
+# 3. DeepSeek API Configuration
 LargeR is powered by DeepSeek-V3. You need an API Key to run the agent.
 
-# Get Your Key
+### Get Your Key
 Register at [DeepSeek Open Platform](https://api-docs.deepseek.com/zh-cn/api/deepseek-api/).
 
 Go to API Keys and create a new key.
 
 Copy the key (starts with sk-...).
 
-# Replace with your actual key
+### Replace with your actual key
 ```bash
 
 If you prefer, you can paste your key directly into the code.
@@ -64,7 +64,7 @@ Once installed, simply run the agent:
 python run_agent.py
 ```
 
-### 4. Runtime description
+# 4. Runtime description
 
 Users should place the input dataset as a CSV file named train.csv under the ./datasets/ directory. To facilitate quick testing and reproducibility, we provide a small demonstration dataset in the ./datasets/ directory. 
 
@@ -72,7 +72,7 @@ During execution, LargeR automatically handles data loading, model initializatio
 
 During runtime, both model training and performance inspection can be carried out via natural language interaction.
 
-### 5. Paper describing 
+# 5. Paper describing 
 
 This work has been received in Frontiers of Computer Science（FCS） special column “Code & Data”.
 
